@@ -63,4 +63,4 @@ MIT License — Use, modify, learn. Respect the knowledge.
 ---
 
 ### 🧠 About
-Created by **Yağız Atalay** under the **Khaelita** security research label.
+Created by Yağız Atalay under the Khaelita security research label. Made to explore, understand, and help secure real-world privilege escalation vectors.
