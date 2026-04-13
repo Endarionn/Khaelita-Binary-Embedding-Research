@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/1f994aab-9f29-4883-be19-a5f4760d82e9" /><img width="1224" height="808" alt="9axbr79sa1rmy0cxh2psb92f28" src="https://github.com/user-attachments/assets/dedf75ff-e25d-4174-a9c5-79d9174ca006" />
+<img width="1224" height="808" alt="9axbr79sa1rmy0cxh2psb92f28" src="https://github.com/user-attachments/assets/0bc26618-ca9a-4281-a807-1413f649c996" />
 
 🧬 Khaelita Binary Embedding Research
 A technical research project and Proof-of-Concept implementation of Binary Data Embedding and Stub-Builder architecture, written in C#. This project demonstrates how to inject, store, and extract dynamic configurations within a compiled executable without modifying the source code or recompiling.
