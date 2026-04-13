@@ -1,90 +1,66 @@
-<img width="1224" height="808" alt="9axbr79sa1rmy0cxh2psb92f28" src="https://github.com/user-attachments/assets/0bc26618-ca9a-4281-a807-1413f649c996" />
+# <img src="logo.png" width="400" alt="Khaelita Logo">
 
-🧬 Khaelita Binary Embedding Research
-A technical research project and Proof-of-Concept implementation of Binary Data Embedding and Stub-Builder architecture, written in C#. This project demonstrates how to inject, store, and extract dynamic configurations within a compiled executable without modifying the source code or recompiling.
+# 🧬 Khaelita Binary Embedding Research
 
-⚙️ Project Overview
-Khaelita Binary Embedding Research explores the mechanism of appending custom data to the end of a Portable Executable (PE) file, beyond the last section header. This technique allows an application to be "data-driven" while remaining a single, portable binary.
+> **Proof-of-Concept implementation of Binary Data Embedding and Stub-Builder architecture.**
+> *Written in pure C# for educational and research purposes.*
 
-Components
-The Builder: A C# WinForms utility that acts as the "compiler" for the configuration. It serializes data into JSON and appends it to the template.
+---
 
-The Stub: A lightweight template executable designed to scan its own binary footprint, find a specific signature (<DATA>), and adapt its behavior based on the discovered payload.
+## ⚙️ Project Overview
 
-🚀 Use Cases: Why Use Binary Embedding?
-This technique is a versatile architectural pattern used in various fields of software engineering:
+**Khaelita Binary Embedding Research** focuses on the technical mechanism of appending custom configuration data to the end of a Portable Executable (PE) file. This allows a pre-compiled binary (Stub) to act dynamically based on the data injected by a secondary tool (Builder).
 
-1. Legitimate Software Engineering
-Portable Applications: Storing user preferences or license information directly inside the .exe so the app remains a single file.
+---
 
-Custom Installers: Web installers that embed a unique "Download ID" or "Affiliate Tag" into the binary before the user downloads it.
+### 🛠️ Core Components
 
-Game Assets: Small-scale games that embed level data or scripts at the end of the engine executable for fast access.
+| Component | Description |
+| :--- | :--- |
+| **The Builder** | A WinForms utility that serializes configuration into JSON and appends it to the binary. |
+| **The Stub** | The payload/client that reads itself at runtime to extract the hidden configuration. |
 
-2. Cybersecurity & Malware Research (Red Teaming)
-In the context of cybersecurity, this method is the industry standard for creating modular tools:
+---
 
-C2 Communication: Storing the Command & Control (C2) server IP and Port inside a "Loader" or "Bot" binary without hardcoding it in the source.
+### 🚀 Technical Scenarios & Use Cases
 
-Payload Droppers: Embedding an encrypted secondary payload (like a DLL or shellcode) that the stub decrypts and executes in memory.
+#### 1. Legitimate Software Design
+- **Single-File Portability:** Storing license keys or user settings directly in the `.exe`.
+- **Custom Deployments:** Embedding unique deployment IDs in web-installers.
 
-Unique Identifiers: Generating unique binaries for each target to track infections or bypass simple hash-based detection.
+#### 2. Red Teaming & Malware Research (Educational)
+- **C2 Configuration:** Malware loaders often use this "Overlay" technique to store Command & Control server addresses without hardcoding them.
+- **Payload Droppers:** Embedding encrypted secondary files at the end of the PE file to be decrypted in memory.
 
-🛠️ Technical Implementation
-The "Stitching" Process
-The Builder follows these steps to create the output binary:
+---
 
-Read the raw bytes of the Stub.exe.
+### 🔬 How It Works (Step-by-Step)
 
-Serialize the Config object into a UTF-8 JSON string.
+1.  **Serialization:** Builder converts inputs into a minified JSON string.
+2.  **Stitching:** The Builder copies the `Stub.exe` and appends a 6-byte marker `<DATA>`, followed by the data length, and the JSON payload.
+3.  **Self-Analysis:** Upon execution, the Stub locates the marker within its own byte array.
+4.  **Dynamic Execution:** The extracted config is applied to the UI or logic in real-time.
 
-Append a Hardcoded Marker (<DATA>) to signal where the data begins.
+---
 
-Append the Data Length (4 bytes) to tell the Stub how much to read.
+### 🛡️ Defensive Perspective (Blue Teaming)
 
-Append the Actual JSON Data.
+- **Overlay Detection:** Security tools check if the file size on disk is larger than the size specified in the PE header.
+- **Entropy Analysis:** Encrypted data appended to the end of a file results in high entropy, signaling hidden payloads.
 
-The "Extraction" Process (Stub Logic)
-The Stub uses a specialized algorithm to locate the data at runtime:
+---
 
-C#
-// Logic to find the offset of the embedded data
-private int FindMarker(byte[] data, byte[] marker) {
-    for (int i = 0; i <= data.Length - marker.Length; i++) {
-        // ... byte-by-byte comparison ...
-    }
-}
-📋 Compilation & Setup
-Requirements
-IDE: Visual Studio 2022
+### ⚠️ Legal Notice
 
-Language: C# / .NET Framework 4.7.2+
+This software is provided for **educational, ethical research, and awareness purposes only**. Any unauthorized use or deployment of this tool in real-world environments may violate laws. The author takes **no responsibility** for misuse.
 
-Dependency: Newtonsoft.Json
+---
 
-Build Steps
-Clone the repository.
+### 📄 License
 
-Build the Stub project in Release mode.
+MIT License — Use, modify, learn. Respect the knowledge.
 
-Ensure Stub.exe is present in the Builder's output directory.
+---
 
-Run Builder.exe, enter your configuration, and click Build.
-
-🛡️ Defensive Perspective (Blue Teaming)
-Understanding this technique is crucial for security analysts and incident responders:
-
-Static Analysis: Analysts look for "Overlay" data (data located after the legitimate PE sections) to find hidden configurations.
-
-Entropy Analysis: High entropy at the end of a file often indicates encrypted or compressed embedded payloads.
-
-Signature Detection: Security tools monitor for common markers or JSON structures appended to known legitimate binaries.
-
-⚠️ Legal & Ethical Notice
-This project is strictly for educational, ethical research, and software architecture demonstration purposes. The techniques described here are neutral; however, their application in creating unauthorized or harmful software is strictly prohibited. The author is not responsible for any misuse of this information.
-
-📄 License
-Distributed under the MIT License. See LICENSE for more information.
-
-🧠 About the Author
-Created by Yağız Atalay under the Khaelita security research label. Exploring the boundaries of binary manipulation, system internals, and defensive programming.
+### 🧠 About
+Created by **Yağız Atalay** under the **Khaelita** security research label.
