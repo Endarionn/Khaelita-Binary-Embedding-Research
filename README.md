@@ -1,4 +1,4 @@
-# <img src="logo.png" width="400" alt="Khaelita Logo">
+<img width="1224" height="808" alt="9axbr79sa1rmy0cxh2psb92f28" src="https://github.com/user-attachments/assets/75ba90db-d979-4e90-8130-cb317c15ac44" />
 
 # 🧬 Khaelita Binary Embedding Research
 
